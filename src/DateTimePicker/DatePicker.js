@@ -105,6 +105,9 @@ var DatePicker = React.createClass({
 
     var viewDate = this.state.viewDate;
 
+    //set date to beginning of month, in case of viewDate will plus an extra month ,when date is greater than max date in new month.
+    viewDate.setDate(1);
+
     if (/new/ig.test(event.target.className)) {
       viewDate.setMonth(viewDate.getMonth() + 1);
     } else if (/old/ig.test(event.target.className)) {
