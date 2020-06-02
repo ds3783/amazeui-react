@@ -28,6 +28,13 @@ var DateTimeInput = React.createClass({
       showPicker: false
     };
   },
+  componentDidUpdate:function(prevProps) {
+    if (prevProps.dateTime !== this.props.dateTime) {
+      this.setState({
+        value: this.props.dateTime || fecha.format(new Date(), this.props.format),
+      });
+    }
+  },
 
   handleOuterClick: function(event) {
     var picker = ReactDOM.findDOMNode(this.refs.DateTimePicker);
