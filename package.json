@@ -1,7 +1,7 @@
 {
   "name": "nestia-amazeui-react",
   "title": "Amaze UI React",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "description": "Amaze UI components build with React.",
   "main": "lib/AMUIReact.js",
   "scripts": {
