@@ -1,4 +1,4 @@
-/*! Amaze UI React v1.1.5 | by Amaze UI Team | (c) 2020 AllMobilize, Inc. | Licensed under MIT | 2020-06-02T15:45:27+0800 */
+/*! Amaze UI React v1.1.8 | by Amaze UI Team | (c) 2020 AllMobilize, Inc. | Licensed under MIT | 2020-06-19T14:41:30+0800 */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory(require("react"), require("react-dom"));
@@ -64,7 +64,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 	module.exports = {
-	  VERSION: '1.1.5',
+	  VERSION: '1.1.8',
 
 	  // layout
 	  Grid: __webpack_require__(2),
@@ -5270,8 +5270,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    nextMonth.setDate(nextMonth.getDate() + 42);
 	    nextMonth = nextMonth.valueOf();
 
-	    var minDate = this.props.minDate && fecha.parse(this.props.minDate);
-	    var maxDate = this.props.maxDate && fecha.parse(this.props.maxDate);
+	    var minDate = this.props.minDate && fecha.parse(this.props.minDate, this.props.format);
+	    var maxDate = this.props.maxDate && fecha.parse(this.props.maxDate, this.props.format);
 
 	    while (prevMonth.valueOf() < nextMonth) {
 	      classes[this.prefixClass('day')] = true;
@@ -5442,8 +5442,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var year = this.props.selectedDate.getFullYear();
 	    var i = 0;
 	    var months = [];
-	    var minDate = this.props.minDate && fecha.parse(this.props.minDate);
-	    var maxDate = this.props.maxDate && fecha.parse(this.props.maxDate);
+	    var minDate = this.props.minDate && fecha.parse(this.props.minDate, this.props.format);
+	    var maxDate = this.props.maxDate && fecha.parse(this.props.maxDate, this.props.format);
 	    var prevMonth = new Date(year, month);
 
 	    // TODO: minDate maxDate months

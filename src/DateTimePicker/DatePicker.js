@@ -23,7 +23,7 @@ var DatePicker = React.createClass({
     locale: React.PropTypes.string
   },
 
-  getDefaultProps: function() {
+  getDefaultProps: function () {
     return {
       classPrefix: 'datepicker',
       date: new Date(),
@@ -39,7 +39,7 @@ var DatePicker = React.createClass({
     };
   },
 
-  getInitialState: function() {
+  getInitialState: function () {
     var displayed;
 
     switch (this.props.viewMode) {
@@ -78,7 +78,7 @@ var DatePicker = React.createClass({
 
   // DaysPicker props function
 
-  subtractMonth: function() {
+  subtractMonth: function () {
     var viewDate = this.state.viewDate;
     var newDate = new Date(viewDate.valueOf());
 
@@ -88,7 +88,7 @@ var DatePicker = React.createClass({
     });
   },
 
-  addMonth: function() {
+  addMonth: function () {
     var viewDate = this.state.viewDate;
     var newDate = new Date(viewDate.valueOf());
 
@@ -98,7 +98,7 @@ var DatePicker = React.createClass({
     });
   },
 
-  setSelectedDate: function(event) {
+  setSelectedDate: function (event) {
     if (/disabled/ig.test(event.target.className)) {
       return;
     }
@@ -119,17 +119,17 @@ var DatePicker = React.createClass({
     this.setViewDate(viewDate);
   },
 
-  setViewDate: function(viewDate) {
+  setViewDate: function (viewDate) {
     this.setState({
       viewDate: viewDate,
       selectedDate: new Date(viewDate.valueOf())
-    }, function() {
+    }, function () {
       this.props.onSelect(this.state.selectedDate);
       this.props.onClose && this.props.onClose();
     });
   },
 
-  showMonths: function() {
+  showMonths: function () {
     return this.setState({
       displayed: {
         days: {display: 'none'},
@@ -141,7 +141,7 @@ var DatePicker = React.createClass({
 
   // MonthsPicker props function
 
-  subtractYear: function() {
+  subtractYear: function () {
     var viewDate = this.state.viewDate;
     var newDate = new Date(viewDate.valueOf());
 
@@ -152,7 +152,7 @@ var DatePicker = React.createClass({
     });
   },
 
-  addYear: function() {
+  addYear: function () {
     var viewDate = this.state.viewDate;
     var newDate = new Date(viewDate.valueOf());
 
@@ -162,7 +162,7 @@ var DatePicker = React.createClass({
     });
   },
 
-  showYears: function() {
+  showYears: function () {
     return this.setState({
       displayed: {
         days: {display: 'none'},
@@ -172,7 +172,7 @@ var DatePicker = React.createClass({
     });
   },
 
-  setViewMonth: function(event) {
+  setViewMonth: function (event) {
     var viewDate = this.state.viewDate;
     var month = event.target.innerHTML;
     var months = this.state.locale.monthsShort;
@@ -201,7 +201,7 @@ var DatePicker = React.createClass({
 
   // YearsPicker props function
 
-  setViewYear: function(event) {
+  setViewYear: function (event) {
     var year = event.target.innerHTML;
     var viewDate = this.state.viewDate;
 
@@ -221,7 +221,7 @@ var DatePicker = React.createClass({
     });
   },
 
-  addDecade: function() {
+  addDecade: function () {
     var viewDate = this.state.viewDate;
     var newDate = new Date(viewDate.valueOf());
 
@@ -231,7 +231,7 @@ var DatePicker = React.createClass({
     });
   },
 
-  subtractDecade: function() {
+  subtractDecade: function () {
     var viewDate = this.state.viewDate;
     var newDate = new Date(viewDate.valueOf());
 
@@ -243,7 +243,7 @@ var DatePicker = React.createClass({
   },
 
   // render children
-  renderDays: function() {
+  renderDays: function () {
     return (
       <DaysPicker
         style={this.state.displayed.days}
@@ -261,11 +261,11 @@ var DatePicker = React.createClass({
         daysOfWeekDisabled={this.props.daysOfWeekDisabled}
         minDate={this.props.minDate}
         maxDate={this.props.maxDate}
-        />
+      />
     );
   },
 
-  renderMonths: function() {
+  renderMonths: function () {
     return (
       <MonthsPicker
         style={this.state.displayed.months}
@@ -275,11 +275,11 @@ var DatePicker = React.createClass({
         viewDate={this.state.viewDate}
         selectedDate={this.state.selectedDate}
         showYears={this.showYears}
-        setViewMonth={this.setViewMonth} />
+        setViewMonth={this.setViewMonth}/>
     );
   },
 
-  renderYears: function() {
+  renderYears: function () {
     return (
       <YearsPicker
         style={this.state.displayed.years}
@@ -287,11 +287,11 @@ var DatePicker = React.createClass({
         selectDate={this.state.selectedDate}
         setViewYear={this.setViewYear}
         addDecade={this.addDecade}
-        subtractDecade={this.subtractDecade} />
+        subtractDecade={this.subtractDecade}/>
     );
   },
 
-  render: function() {
+  render: function () {
     return (
       <div className={this.prefixClass('body')}>
         {this.renderDays()}
@@ -322,13 +322,13 @@ var DaysPicker = React.createClass({
     maxDate: React.PropTypes.string
   },
 
-  getDefaultProps: function() {
+  getDefaultProps: function () {
     return {
       classPrefix: 'datepicker'
     };
   },
 
-  renderDays: function() {
+  renderDays: function () {
     var row;
     var i;
     var _ref;
@@ -361,8 +361,8 @@ var DaysPicker = React.createClass({
     nextMonth.setDate(nextMonth.getDate() + 42);
     nextMonth = nextMonth.valueOf();
 
-    var minDate = this.props.minDate && fecha.parse(this.props.minDate);
-    var maxDate = this.props.maxDate && fecha.parse(this.props.maxDate);
+    var minDate = this.props.minDate && fecha.parse(this.props.minDate, this.props.format);
+    var maxDate = this.props.maxDate && fecha.parse(this.props.maxDate, this.props.format);
 
     while (prevMonth.valueOf() < nextMonth) {
       classes[this.prefixClass('day')] = true;
@@ -385,11 +385,11 @@ var DaysPicker = React.createClass({
 
       // set className disabled
       if ((minDate && prevMonth.valueOf() < minDate)
-          || (maxDate && prevMonth.valueOf() > maxDate)) {
+        || (maxDate && prevMonth.valueOf() > maxDate)) {
         classes[this.setClassNamespace('disabled')] = true;
       }
 
-       // week disabled
+      // week disabled
       if (this.props.daysOfWeekDisabled) {
         _ref = this.props.daysOfWeekDisabled;
         for (_i = 0, _len = _ref.length; _i < _len; _i++) {
@@ -425,7 +425,7 @@ var DaysPicker = React.createClass({
     return html;
   },
 
-  renderWeek: function() {
+  renderWeek: function () {
     var ths = [];
     var locale = this.props.locale;
     var weekStart = this.props.weekStart || this.props.locale.weekStart;
@@ -446,7 +446,7 @@ var DaysPicker = React.createClass({
     );
   },
 
-  render: function() {
+  render: function () {
     var viewDate = this.props.viewDate;
     var prefixClass = this.prefixClass;
     var locale = this.props.locale;
@@ -501,20 +501,20 @@ var MonthsPicker = React.createClass({
     maxDate: React.PropTypes.string
   },
 
-  getDefaultProps: function() {
+  getDefaultProps: function () {
     return {
       classPrefix: 'datepicker'
     };
   },
 
-  renderMonths: function() {
+  renderMonths: function () {
     var classes = {};
     var month = this.props.selectedDate.getMonth();
     var year = this.props.selectedDate.getFullYear();
     var i = 0;
     var months = [];
-    var minDate = this.props.minDate && fecha.parse(this.props.minDate);
-    var maxDate = this.props.maxDate && fecha.parse(this.props.maxDate);
+    var minDate = this.props.minDate && fecha.parse(this.props.minDate, this.props.format);
+    var maxDate = this.props.maxDate && fecha.parse(this.props.maxDate, this.props.format);
     var prevMonth = new Date(year, month);
 
     // TODO: minDate maxDate months
@@ -549,7 +549,7 @@ var MonthsPicker = React.createClass({
     return months;
   },
 
-  render: function() {
+  render: function () {
     return (
       <SubPicker
         displayName="months"
@@ -558,7 +558,7 @@ var MonthsPicker = React.createClass({
         add={this.props.addYear}
         showFunc={this.props.showYears}
         showText={this.props.viewDate.getFullYear()}
-        body={this.renderMonths()} />
+        body={this.renderMonths()}/>
     );
   }
 });
@@ -574,13 +574,13 @@ var YearsPicker = React.createClass({
     setViewYear: React.PropTypes.func.isRequired
   },
 
-  getDefaultProps: function() {
+  getDefaultProps: function () {
     return {
       classPrefix: 'datepicker'
     };
   },
 
-  renderYears: function() {
+  renderYears: function () {
     var classes = {};
     var years = [];
     var i = -1;
@@ -616,7 +616,7 @@ var YearsPicker = React.createClass({
     return years;
   },
 
-  render: function() {
+  render: function () {
     var year = parseInt(this.props.viewDate.getFullYear() / 10, 10) * 10;
     var addYear = year + 9;
     var showYear = year + '-' + addYear;
@@ -628,7 +628,7 @@ var YearsPicker = React.createClass({
         subtract={this.props.subtractDecade}
         add={this.props.addDecade}
         showText={showYear}
-        body={this.renderYears()} />
+        body={this.renderYears()}/>
     );
   }
 });
@@ -636,13 +636,13 @@ var YearsPicker = React.createClass({
 var SubPicker = React.createClass({
   mixins: [ClassNameMixin],
 
-  getDefaultProps: function() {
+  getDefaultProps: function () {
     return {
       classPrefix: 'datepicker'
     };
   },
 
-  render: function() {
+  render: function () {
     var prefixClass = this.prefixClass;
 
     return (
